@@ -32,4 +32,5 @@ jobs:
       - name: ll-builder build
         run: |
           IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
-          docker run -i --privileged -v $PWD:/home/builder $IMAGE ll-builder build
+          WORKDIR=/home/builder/projects
+          docker run -i --privileged -v $PWD:$WORKDIR -w $WORKDIR $IMAGE ll-builder build
