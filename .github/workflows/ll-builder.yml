@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -17,20 +17,9 @@ jobs:
 
       - name: Run a one-line script
         run: echo Hello, world!
-        
-      - name: Docker Setup Docker
-        uses: docker/setup-docker-action@v4.3.0
-
-      - name: Hello privileged
+      - name: Setup ll-builder
         run: |
-          docker run -i --privileged debian echo "Hello privileged"
-      # - name: Hello ll-builder
-      #   run: |
-      #     IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
-      #     docker run -i --privileged $IMAGE ll-builder --version
-      
-      - name: ll-builder build
-        run: |
-          IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
-          WORKDIR=/home/builder/projects
-          docker run -i --privileged -v $PWD:$WORKDIR -w $WORKDIR $IMAGE ll-builder build
+          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/linglong:/CI:/release/xUbuntu_24.04/ ./" | sudo tee /etc/apt/sources.list.d/linglong.list
+          apt update
+          apt-get install -y --no-install-recommends linglong-builder
+          ll-builder build
