@@ -1,0 +1,24 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo Hello, world!
+        
+      - name: Docker Setup Docker
+        uses: docker/setup-docker-action@v4.3.0
+
+      - name: Hello privileged
+        run: |
+          docker run --privileged debian echo "Hello privileged" 
