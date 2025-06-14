@@ -22,3 +22,5 @@ jobs:
       - name: Hello privileged
         run: |
           docker run --privileged debian echo "Hello privileged" 
+          IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
+          docker run -ti --privileged -v $PWD:/home/builder $IMAGE ll-builder --version 
