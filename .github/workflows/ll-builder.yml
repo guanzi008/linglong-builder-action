@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: linuxdeepin/linglong-builder-demo
 
       - name: Run a one-line script
         run: echo Hello, world!
@@ -25,4 +27,9 @@ jobs:
       - name: Hello ll-builder
         run: |
           IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
-          docker run -i --privileged -v $PWD:/home/builder $IMAGE ll-builder --version 
+          docker run -i --privileged $IMAGE ll-builder --version
+      
+      - name: ll-builder build
+        run: |
+          IMAGE=registry.cn-hangzhou.aliyuncs.com/linyaps/builder:1.8.1
+          docker run -i --privileged -v $PWD:/home/builder $IMAGE ll-builder build
