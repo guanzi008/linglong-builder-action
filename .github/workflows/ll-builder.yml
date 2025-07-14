@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -15,11 +15,4 @@ jobs:
         with:
           repository: linuxdeepin/linglong-builder-demo
 
-      - name: Run a one-line script
-        run: echo Hello, world!
-      - name: Setup ll-builder
-        run: |
-          echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/linglong:/CI:/release/xUbuntu_24.04/ ./" | sudo tee /etc/apt/sources.list.d/linglong.list
-          sudo apt update
-          sudo apt-get install -y --no-install-recommends linglong-builder linglong-box
-          ll-builder build
+      - uses: myml/linglong-builder-action@v1
