@@ -1,0 +1,28 @@
+# action.yml
+name: "ll-builder-build"
+description: "linyaps builder action"
+author: myml
+inputs:
+  files:
+    description: "linglong.yaml file path"
+    default: "linglong.yaml"
+    required: true
+
+branding:
+  icon: align-center
+  color: "white"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install
+      shell: bash
+      run: |
+        echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/linglong:/CI:/release/xUbuntu_24.04/ ./" | sudo tee /etc/apt/sources.list.d/linglong.list
+        sudo apt update
+        sudo apt-get install -y --no-install-recommends linglong-builder linglong-box
+    - name: Build
+      shell: bash
+      run: |
+        ll-builder build --skip-output-check
+        ll-builder export
