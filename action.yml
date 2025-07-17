@@ -34,5 +34,5 @@ runs:
       run: |
         export QT_LOGGING_RULES='*.debug=true'
         ll-builder repo update stable https://repo-cdn77.linyaps.org.cn
-        ll-builder build --skip-output-check
-        ll-builder export
+        # ll-builder build --skip-output-check
+        # ll-builder export
