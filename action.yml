@@ -26,7 +26,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: |
-          ~/.cache/linglong-builder/repo/objects
+          ~/.cache/linglong-builder
         key: ${{ runner.os }}-linglong-builder-repo-objects
 
     - name: Build
