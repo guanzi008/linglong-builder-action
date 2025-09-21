@@ -20,12 +20,12 @@ runs:
       run: |
         sudo apt update
         sudo apt-get install -y --no-install-recommends git
-        git clone https://github.com/guanzi008/linyaps
-        cd linyaps
-        git checkout obs_latest
-        sudo apt-get build-dep ./ -y
-        dpkg-buildpackage -uc -us -b
-        sudo apt-get install -y --no-install-recommends ../*.deb
+        # git clone https://github.com/guanzi008/linyaps
+        # cd linyaps
+        # git checkout obs_latest
+        # sudo apt-get build-dep ./ -y
+        # dpkg-buildpackage -uc -us -b
+        sudo apt-get install -y --no-install-recommends ./*.deb
 
     - name: Cache
       uses: actions/cache@v4
