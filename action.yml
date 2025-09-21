@@ -18,9 +18,14 @@ runs:
     - name: Install
       shell: bash
       run: |
-        echo "deb [trusted=yes] https://ci.deepin.com/repo/obs/linglong:/CI:/release/xUbuntu_24.04/ ./" | sudo tee /etc/apt/sources.list.d/linglong.list
         sudo apt update
-        sudo apt-get install -y --no-install-recommends linglong-builder linglong-box
+        sudo apt-get install -y --no-install-recommends git
+        git clone https://github.com/guanzi008/linyaps
+        cd linyaps
+        git checkout obs_latest
+        sudo apt-get build-dep ./ -y
+        dpkg-buildpackage -uc -us -b
+        sudo apt-get install -y --no-install-recommends ../*.deb
 
     - name: Cache
       uses: actions/cache@v4
