@@ -16,4 +16,4 @@ jobs:
           repository: linuxdeepin/linglong-builder-demo
 
       - name: ll-builder-build
-        uses: myml/linglong-builder-action@main
+        uses: guanzi008/linglong-builder-action@main
